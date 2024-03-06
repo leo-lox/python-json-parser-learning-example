@@ -4,13 +4,19 @@ from main import *
 from helpers import *
 
 
+data = {
+    "name": "Bob",
+    "age": 30,
+    "languages": ["Python", "Java"]
+}
+
+json_string = '{"name": "Bob", "age": 30, "languages": ["Python", "Java"]}'
+custom_string = "{name:Bob,age:30,languages:['Python', 'Java']}"
+
 class JsonTests(unittest.TestCase):
+
     def test_encode_json(self):
-        data = {
-            "name": "John Doe",
-            "age": 30,
-            "city": "New York"
-        }
+
         start_time = time.perf_counter_ns()  # get current time in nanoseconds
         result = main.encode_json_native(data)
         end_time = time.perf_counter_ns()  # get current time in nanoseconds
@@ -28,7 +34,7 @@ class JsonTests(unittest.TestCase):
         print(f"\n\n")
 
     def test_decode_json(self):
-        json_string = '{"name": "John Doe", "age": 30, "city": "New York"}'
+        
         start_time = time.perf_counter_ns()  # get current time in nanoseconds
         result = main.decode_json_native(json_string)
         end_time = time.perf_counter_ns()  # get current time in nanoseconds
@@ -41,11 +47,7 @@ class JsonTests(unittest.TestCase):
         print(f"\n\n")
 
     def test_encode(self):
-        data = {
-            "name": "John Doe",
-            "age": 30,
-            "city": "New York"
-        }
+
         start_time = time.perf_counter_ns()
         result = main.encode(data)
         end_time = time.perf_counter_ns()
@@ -63,9 +65,8 @@ class JsonTests(unittest.TestCase):
 
     def test_decode(self):
 
-        some_string = '{"name": "John Doe", "age": 30, "city": "New York"}'
         start_time = time.perf_counter_ns()
-        result = main.decode(some_string)
+        result = main.decode(custom_string)
         end_time = time.perf_counter_ns()
         execution_time = end_time - start_time
 
@@ -80,22 +81,26 @@ class JsonTests(unittest.TestCase):
 
 
     def test_z_compare_encode(self):
-        data = {
-            "name": "John Doe",
-            "age": 30,
-            "city": "New York"
-        }
+
+        # custom encode
         start_time = time.perf_counter_ns()
         result = main.encode(data)
         end_time = time.perf_counter_ns()
         execution_time = end_time - start_time
         byte_length = helpers.utf8len(result)
 
+        # json encode
         start_time_json = time.perf_counter_ns()
         result_json = main.encode_json_native(data)
         end_time_json = time.perf_counter_ns()
         execution_time_json = end_time_json - start_time_json
         byte_length_json = helpers.utf8len(result_json)
+
+
+        print(f" 🔨 RESULTS: 🔨 ")
+        print(f"custom: {result}")
+        print(f"json:   {result_json}")
+        print(f"\n")
 
         print(f" ⌛ COMPARE: ⌛ ")
         print(f"custom: {byte_length} bytes | {execution_time} ns")
