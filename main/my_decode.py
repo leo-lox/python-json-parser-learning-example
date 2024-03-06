@@ -1,6 +1,9 @@
+import json
 """
     Decode the given  string into Python data.
 """
 def decode(string):
     
-    raise NotImplementedError("Not implemented")
+    ## example json decoding
+
+    return json.loads(string)

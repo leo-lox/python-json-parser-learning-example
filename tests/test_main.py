@@ -79,7 +79,7 @@ class JsonTests(unittest.TestCase):
 
 
 
-    def compare_encode(self):
+    def test_z_compare_encode(self):
         data = {
             "name": "John Doe",
             "age": 30,
@@ -97,13 +97,11 @@ class JsonTests(unittest.TestCase):
         execution_time_json = end_time_json - start_time_json
         byte_length_json = helpers.utf8len(result_json)
 
-        print(f"encode:")
-        print(f"Custom: {execution_time} nanoseconds")
-        print(f"{byte_length} bytes")
+        print(f" ⌛ COMPARE: ⌛ ")
+        print(f"custom: {byte_length} bytes | {execution_time} ns")
+        print(f"json:   {byte_length_json} bytes | {execution_time_json} ns")
+
         print(f"\n")
-        print(f"JSON: {execution_time_json} nanoseconds")
-        print(f"{byte_length_json} bytes")
-        print(f"\n\n")
 
         # make comparison if its longer or shorter by calculating the difference
         if byte_length_json > byte_length:
