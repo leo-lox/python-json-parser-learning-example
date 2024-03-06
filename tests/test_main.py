@@ -11,7 +11,7 @@ data = {
 }
 
 json_string = '{"name": "Bob", "age": 30, "languages": ["Python", "Java"]}'
-custom_string = "S4nameBobS3age30S9languages['Python', 'Java']"
+custom_string = "S4nameS3BobS3ageI30S9languagesL2[S6PythonS4Java]"
 
 class JsonTests(unittest.TestCase):
 

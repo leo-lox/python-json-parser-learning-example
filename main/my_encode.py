@@ -8,12 +8,22 @@ def encode(obj):
     """
     Encode the given data into a string.
     """
-    if isinstance(obj, dict):
-        # For dictionaries, we'll use a comma-separated key-value pair format
-        return "{" + ",".join(f"{key}:{value}" for key, value in obj.items()) + "}"
-    elif isinstance(obj, list):
-        # For lists, we'll use a comma-separated value format
-        return "[" + ",".join(str(item) for item in obj) + "]"
-    else:
-        # For other types (e.g., strings, numbers), simply convert to a string
-        return str(obj)
+    def encode_value(value):
+        if isinstance(value, str):
+            return f"S{len(value)}{value}"
+        elif isinstance(value, int):
+            return f"I{value}"
+        elif value is None:
+            return "N"
+        elif isinstance(value, list):
+            encoded_elements = "".join(encode_value(item) for item in value)
+            return f"L{len(value)}[{encoded_elements}]"
+        else:
+            raise ValueError(f"Unsupported type: {type(value)}")
+
+    encoded_string = ""
+    for key, value in obj.items():
+        encoded_string += f"S{len(key)}{key}{encode_value(value)}"
+    return encoded_string
+
+
