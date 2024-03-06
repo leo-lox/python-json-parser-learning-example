@@ -1,1 +1,1 @@
-__all__ = ['main']
+__all__ = ['main', 'my_encode', 'my_decode']
