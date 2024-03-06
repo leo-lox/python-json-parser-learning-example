@@ -1,6 +1,6 @@
 import json
-import my_encode
-import my_decode
+import main.my_decode as my_decode
+import main.my_encode as my_encode
 
 def encode_json_native(data):
     """
@@ -44,6 +44,9 @@ def main():
     # Decoding JSON to data
     decoded_data = decode_json_native(encoded_json)
     print("Decoded data:", decoded_data)
+
+    decode(encoded_json)
+    encode(data)
 
 if __name__ == "__main__":
     main()
