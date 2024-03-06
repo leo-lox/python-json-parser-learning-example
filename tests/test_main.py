@@ -11,7 +11,7 @@ data = {
 }
 
 json_string = '{"name": "Bob", "age": 30, "languages": ["Python", "Java"]}'
-custom_string = "{name:Bob,age:30,languages:['Python', 'Java']}"
+custom_string = "S4nameBobS3age30S9languages['Python', 'Java']"
 
 class JsonTests(unittest.TestCase):
 
@@ -76,6 +76,10 @@ class JsonTests(unittest.TestCase):
         print(f"{execution_time} nanoseconds")
         print(f"\n\n")
 
+
+    def test_encode_decode(self):
+            result = main.decode(main.encode(data))
+            self.assertIsInstance(result, dict)
 
 
 
